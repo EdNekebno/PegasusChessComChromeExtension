@@ -1,4 +1,4 @@
-# PegasusChessComChromeExtension
+# Pegasus Chess.com Chrome Extension
 
 A chrome extension to enable using the DGT Pegasus board with the chess.com website
 
