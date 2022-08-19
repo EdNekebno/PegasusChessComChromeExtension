@@ -1,0 +1,17 @@
+{
+  "name": "Pegasus-Chess.com Chrome Extension",
+  "description" : "Talks to the Pegasus Chess board to enable playing on chess.com in the browser with the board",
+  "version": "1.0",
+  "host_permissions": [
+    "https://*.chess.com/*"
+  ],
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": ["content_script.js"],
+      "matches": ["https://*.chess.com/game/*","https://*.chess.com/play/*"],
+      "run_at": "document_idle"
+    }
+  ]
+}
