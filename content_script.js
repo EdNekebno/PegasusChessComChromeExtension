@@ -15,10 +15,12 @@ var commandsendupdates = new Uint8Array([0x44]);
 var ccomboard = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
 function checkboard(value) {
-	if (document.getElementById('game-over-modal').innerHTML.length > 15 || ocument.getElementById('game-over-modal-content').innerHTML.length > 15) {
-		// If there is a game-over-modal then don't send moves. Instead ensure the LEDs are turned offscreenBuffering
-		flashleds(new Array());
-		return;
+	if (document.getElementById('game-over-modal-content')) {
+		if (document.getElementById('game-over-modal').innerHTML.length > 15 || document.getElementById('game-over-modal-content').innerHTML.length > 15) {
+			// If there is a game-over-modal then don't send moves. Instead ensure the LEDs are turned offscreenBuffering
+			flashleds(new Array());
+			return;
+		}
 	}
 	if (!document.getElementsByTagName('chess-board')[0]) {
 		// If there's no chessboard then don't act!
@@ -203,10 +205,12 @@ function pointerup(hp, vp) {
 
 
 function pegasusmove(fromsqnum,tosqnum) {
-	if (document.getElementById('game-over-modal').innerHTML.length > 15 || ocument.getElementById('game-over-modal-content').innerHTML.length > 15) {
-		// If there is a game-over-modal then don't send moves. Instead ensure the LEDs are turned offscreenBuffering
-		flashleds(new Array());
-		return;
+	if (document.getElementById('game-over-modal-content')) {
+		if (document.getElementById('game-over-modal').innerHTML.length > 15 || document.getElementById('game-over-modal-content').innerHTML.length > 15) {
+			// If there is a game-over-modal then don't send moves. Instead ensure the LEDs are turned offscreenBuffering
+			flashleds(new Array());
+			return;
+		}
 	}
 	if (!document.getElementsByTagName('chess-board')[0]) {
 		// If there's no chessboard then don't act!
@@ -310,10 +314,12 @@ async function ble() {
 			checkboard(value);
 		}
 		if (value.getUint8(0) == 142) {
-			if (document.getElementById('game-over-modal').innerHTML.length > 15 || ocument.getElementById('game-over-modal-content').innerHTML.length > 15) {
-				// If there is a game-over-modal then don't send moves. Instead ensure the LEDs are turned offscreenBuffering
-				flashleds(new Array());
-				return;
+			if (document.getElementById('game-over-modal-content')) {
+				if (document.getElementById('game-over-modal').innerHTML.length > 15 || document.getElementById('game-over-modal-content').innerHTML.length > 15) {
+					// If there is a game-over-modal then don't send moves. Instead ensure the LEDs are turned offscreenBuffering
+					flashleds(new Array());
+					return;
+				}
 			}
 			if (!document.getElementsByTagName('chess-board')[0]) {
 				// If there's no chessboard then don't act!
@@ -402,6 +408,7 @@ async function ble() {
 	  txt.innerHTML = txt.innerHTML + "Asking for updates\n";
 	  await characteristictx.writeValue(commandsendupdates);
 	  txt.innerHTML = txt.innerHTML + "Done\n";
+	  flashleds(new Array(0,1,2,3,4,5,6,7));
 	}	
 	document.body.appendChild(button);
 }
